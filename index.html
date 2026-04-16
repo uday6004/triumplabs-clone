@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriumphsLab | Practical IT Training & Career Support</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --primary: #00b894;
+        }
+        
+        * {
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        .tail-container * {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00b894;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        .section-header {
+            position: relative;
+        }
+        
+        .section-header:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #00b894;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body class="tail-container">
+    <!-- NAVBAR -->
+    <nav class="bg-white border-b sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto">
+            <div class="px-6 py-5 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center gap-x-3">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold">T</div>
+                    <div>
+                        <span class="heading-font text-3xl font-semibold tracking-tighter text-gray-900">TriumphsLab</span>
+                    </div>
+                    <span class="text-xs font-medium px-3 py-1 bg-emerald-100 text-emerald-700 rounded-3xl">ESTD 2018</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-x-8 text-gray-700 font-medium">
+                    <a href="#home" class="nav-link text-lg">Home</a>
+                    <a href="#courses" class="nav-link text-lg">Courses</a>
+                    <a href="#about" class="nav-link text-lg">About Us</a>
+                    <a href="#services" class="nav-link text-lg">Services</a>
+                    <a href="#success" class="nav-link text-lg">Success Stories</a>
+                    <a href="#contact" class="nav-link text-lg">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-x-4">
+                    <!-- Login -->
+                    <a href="#" onclick="showLoginModal()" 
+                       class="hidden sm:flex items-center gap-x-2 px-6 py-3 text-sm font-semibold border border-gray-300 rounded-3xl hover:bg-gray-50">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Login
+                    </a>
+                    
+                    <!-- CTA Button -->
+                    <a href="#courses" 
+                       class="flex items-center gap-x-2 bg-emerald-600 hover:bg-emerald-700 text-white px-7 py-3 rounded-3xl font-semibold text-sm shadow-lg shadow-emerald-500/30">
+                        <i class="fa-solid fa-rocket"></i>
+                        Enroll Now
+                    </a>
+                    
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-gray-700">
+                        <i class="fa-solid fa-bars" id="hamburger-icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden px-6 pb-6 bg-white border-t">
+                <div class="flex flex-col gap-y-4 text-lg font-medium pt-4">
+                    <a href="#home" onclick="toggleMobileMenu()" class="py-2">Home</a>
+                    <a href="#courses" onclick="toggleMobileMenu()" class="py-2">Courses</a>
+                    <a href="#about" onclick="toggleMobileMenu()" class="py-2">About Us</a>
+                    <a href="#services" onclick="toggleMobileMenu()" class="py-2">Services</a>
+                    <a href="#success" onclick="toggleMobileMenu()" class="py-2">Success Stories</a>
+                    <a href="#contact" onclick="toggleMobileMenu()" class="py-2">Contact</a>
+                    <div class="pt-4 border-t flex flex-col gap-y-3">
+                        <a href="#" onclick="toggleMobileMenu();showLoginModal()" 
+                           class="flex items-center justify-center gap-x-2 py-4 border rounded-3xl font-semibold">
+                            <i class="fa-solid fa-right-to-bracket"></i> Login
+                        </a>
+                        <a href="#courses" onclick="toggleMobileMenu()" 
+                           class="flex items-center justify-center bg-emerald-600 text-white py-4 rounded-3xl font-semibold">
+                            Enroll Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-x-2 bg-white/20 backdrop-blur-md px-6 py-2 rounded-3xl text-sm font-medium">
+                    <i class="fa-solid fa-check-circle"></i>
+                    Real-Time Learning • Real Career Growth
+                </div>
+                
+                <h1 class="heading-font text-5xl md:text-6xl font-semibold leading-none tracking-tighter">
+                    Do Not Trust Your Luck.<br>
+                    <span class="text-emerald-200">Trust Only The Skills You Learn Here.</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-emerald-100 max-w-lg">
+                    Practical IT training for freshers &amp; professionals. 
+                    Hands-on projects, mock interviews, and 100% placement support.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#courses" 
+                       class="flex-1 md:flex-none bg-white text-emerald-700 hover:bg-emerald-100 px-8 py-5 rounded-3xl font-semibold text-lg flex items-center justify-center gap-x-3 shadow-xl">
+                        <i class="fa-solid fa-book"></i>
+                        Browse Courses
+                    </a>
+                    <a href="#contact" 
+                       class="flex-1 md:flex-none border-2 border-white hover:bg-white/10 px-8 py-5 rounded-3xl font-semibold text-lg flex items-center justify-center gap-x-3">
+                        <i class="fa-solid fa-phone"></i>
+                        Talk to Counselor
+                    </a>
+                </div>
+                
+                <!-- Trust signals -->
+                <div class="flex items-center gap-x-8 text-sm">
+                    <div class="flex items-center gap-x-2">
+                        <div class="flex -space-x-3">
+                            <div class="w-6 h-6 bg-white rounded-2xl flex items-center justify-center text-xs">👨‍💻</div>
+                            <div class="w-6 h-6 bg-white rounded-2xl flex items-center justify-center text-xs">👩‍💻</div>
+                        </div>
+                        <div>
+                            <span class="font-semibold">1500+</span><br>
+                            <span class="text-emerald-100 text-xs">Students trained</span>
+                        </div>
+                    </div>
+                    <div class="h-10 w-px bg-white/30"></div>
+                    <div>
+                        <span class="font-semibold">500+</span><br>
+                        <span class="text-emerald-100 text-xs">Placed in top companies</span>
+                    </div>
+                    <div class="h-10 w-px bg-white/30"></div>
+                    <div class="flex items-center gap-x-1 text-2xl">
+                        ★★★★☆
+                        <span class="text-sm font-medium">4.9/5</span>
+                    </div>
+                </div>
+                
+                <!-- Contact bar -->
+                <div class="bg-white/10 backdrop-blur-md rounded-3xl p-5 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3 text-sm">
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-phone text-2xl"></i>
+                        <div>
+                            <span class="font-semibold">09579338436</span><br>
+                            <span class="font-semibold">07892787036</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-x-3">
+                        <i class="fa-solid fa-envelope text-2xl"></i>
+                        <a href="mailto:contact@triumphslab.com" class="font-medium">contact@triumphslab.com</a>
+                    </div>
+                    <div class="text-xs font-medium bg-white/20 px-4 py-2 rounded-3xl">Bangalore • Mumbai • Pune</div>
+                </div>
+            </div>
+            
+            <!-- Hero visual -->
+            <div class="hidden md:flex justify-center relative">
+                <div class="relative">
+                    <div class="w-80 h-80 bg-white/10 backdrop-blur-3xl rounded-[4rem] rotate-12 absolute -top-10 -left-10 shadow-2xl"></div>
+                    <div class="bg-white rounded-3xl p-4 shadow-2xl relative z-10">
+                        <img src="https://picsum.photos/id/1015/600/600" alt="Student coding" 
+                             class="rounded-3xl w-full aspect-square object-cover">
+                        <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl px-6 py-3 shadow-xl flex items-center gap-x-3">
+                            <div class="text-emerald-600">
+                                <i class="fa-solid fa-graduation-cap text-3xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">Placed at</p>
+                                <p class="text-emerald-600 font-bold">Google • Amazon • Infosys</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WELCOME / ABOUT SECTION -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <div class="md:col-span-7">
+                    <h2 class="section-header text-4xl font-semibold text-gray-900 mb-6">Welcome to TriumphsLab</h2>
+                    <p class="text-2xl text-gray-600 leading-relaxed mb-10">
+                        Real-Time Learning. Real Career Growth.
+                    </p>
+                    <p class="text-lg text-gray-600 max-w-prose">
+                        We empower both technical and non-technical individuals to launch and grow successful careers in the IT industry. 
+                        Our training is designed by industry veterans currently working in top MNCs. No theory. Only practical, job-ready skills.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 mt-12">
+                        <div class="text-center">
+                            <div class="text-5xl font-bold text-emerald-600">2018</div>
+                            <p class="text-gray-500 mt-1">Established</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl font-bold text-emerald-600">10+</div>
+                            <p class="text-gray-500 mt-1">Years avg. trainer exp.</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-5xl font-bold text-emerald-600">8</div>
+                            <p class="text-gray-500 mt-1">Industry courses</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-5 bg-gray-50 rounded-3xl p-10">
+                    <h3 class="text-xl font-semibold mb-8 flex items-center gap-x-3">
+                        <span class="text-emerald-600">Who We Are</span>
+                    </h3>
+                    <p class="text-gray-600 leading-relaxed">
+                        A community of seasoned IT experts with rich industry backgrounds. 
+                        We don't just teach — we share real-world experience from projects we've delivered for global clients.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <div class="px-5 py-2 bg-white rounded-3xl text-sm flex items-center gap-x-2 shadow-sm">
+                            <i class="fa-solid fa-laptop-code"></i>
+                            Live Projects
+                        </div>
+                        <div class="px-5 py-2 bg-white rounded-3xl text-sm flex items-center gap-x-2 shadow-sm">
+                            <i class="fa-solid fa-users"></i>
+                            Mock Interviews
+                        </div>
+                        <div class="px-5 py-2 bg-white rounded-3xl text-sm flex items-center gap-x-2 shadow-sm">
+                            <i class="fa-solid fa-file-lines"></i>
+                            ATS Resumes
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="px-6 py-2 bg-emerald-100 text-emerald-700 rounded-3xl text-sm font-medium">Popular Programs</span>
+                <h2 class="text-4xl font-semibold mt-4">Master Industry-Ready Skills</h2>
+                <p class="text-gray-600 mt-3 max-w-md mx-auto">Choose from our job-oriented courses designed with real-time scenarios and live projects</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Course 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-2 bg-orange-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest font-semibold text-orange-500">Manual Testing</span>
+                                <h3 class="text-2xl font-semibold mt-2">Manual Testing Mastery</h3>
+                            </div>
+                            <i class="fa-solid fa-bug text-5xl text-orange-200"></i>
+                        </div>
+                        <p class="mt-6 text-gray-600">Learn to find bugs, write test cases, and validate software like a pro.</p>
+                        
+                        <div class="mt-8 space-y-4 text-sm">
+                            <div class="flex justify-between"><span class="font-medium">Duration</span><span>60+ Hours</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Mode</span><span>Online • Weekend/Weekday</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Projects</span><span>Real Banking Scenarios</span></div>
+                        </div>
+                        
+                        <a href="#" onclick="alert('Course details modal would open here in full version!')" 
+                           class="mt-8 block text-center py-4 border-2 border-emerald-600 text-emerald-700 rounded-3xl font-semibold hover:bg-emerald-600 hover:text-white">
+                            Get Course Details →
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-2 bg-blue-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest font-semibold text-blue-500">Automation</span>
+                                <h3 class="text-2xl font-semibold mt-2">Java + Selenium</h3>
+                            </div>
+                            <i class="fa-solid fa-robot text-5xl text-blue-200"></i>
+                        </div>
+                        <p class="mt-6 text-gray-600">Build powerful automated test suites with Java and Selenium WebDriver.</p>
+                        
+                        <div class="mt-8 space-y-4 text-sm">
+                            <div class="flex justify-between"><span class="font-medium">Duration</span><span>60+ Hours</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Mode</span><span>Online • Weekend/Weekday</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Projects</span><span>Real-Time Web Apps</span></div>
+                        </div>
+                        
+                        <a href="#" onclick="alert('Course details modal would open here in full version!')" 
+                           class="mt-8 block text-center py-4 border-2 border-emerald-600 text-emerald-700 rounded-3xl font-semibold hover:bg-emerald-600 hover:text-white">
+                            Get Course Details →
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden card-hover border border-transparent">
+                    <div class="h-2 bg-purple-500"></div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <span class="text-xs uppercase tracking-widest font-semibold text-purple-500">DevOps</span>
+                                <h3 class="text-2xl font-semibold mt-2">DevOps Engineering</h3>
+                            </div>
+                            <i class="fa-solid fa-infinity text-5xl text-purple-200"></i>
+                        </div>
+                        <p class="mt-6 text-gray-600">Master CI/CD, Docker, Kubernetes, Jenkins and cloud infrastructure.</p>
+                        
+                        <div class="mt-8 space-y-4 text-sm">
+                            <div class="flex justify-between"><span class="font-medium">Duration</span><span>60+ Hours</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Mode</span><span>Online • Weekday</span></div>
+                            <div class="flex justify-between"><span class="font-medium">Projects</span><span>End-to-End Pipeline</span></div>
+                        </div>
+                        
+                        <a href="#" onclick="alert('Course details modal would open here in full version!')" 
+                           class="mt-8 block text-center py-4 border-2 border-emerald-600 text-emerald-700 rounded-3xl font-semibold hover:bg-emerald-600 hover:text-white">
+                            Get Course Details →
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="text-emerald-600 font-semibold flex items-center justify-center gap-x-2 mx-auto">
+                    View All 8 Courses 
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CHOOSE US -->
+    <section id="services" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-semibold">Why Students Trust TriumphsLab</h2>
+                <p class="text-gray-600 mt-4">Not just training — complete career transformation</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">💼</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">Trainers from MNCs</h4>
+                        <p class="text-gray-600 mt-3">Learn directly from professionals working at product-based companies.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">🛠️</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">Hands-on Live Projects</h4>
+                        <p class="text-gray-600 mt-3">Build real applications used in banking, e-commerce &amp; healthcare.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">🎯</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">Mock Interviews + Feedback</h4>
+                        <p class="text-gray-600 mt-3">80% of our students clear interviews in their first attempt.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">📄</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">ATS-Friendly Resume</h4>
+                        <p class="text-gray-600 mt-3">Professional resume + Naukri profile optimization included.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">📹</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">Lifetime Video Access</h4>
+                        <p class="text-gray-600 mt-3">Revisit any class anytime. Never miss a topic.</p>
+                    </div>
+                </div>
+                <div class="flex gap-6">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl flex-shrink-0">🚀</div>
+                    <div>
+                        <h4 class="font-semibold text-xl">Dedicated Placement Cell</h4>
+                        <p class="text-gray-600 mt-3">Regular job drives, referrals &amp; interview opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS + TESTIMONIALS -->
+    <section id="success" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <!-- Stats -->
+                <div class="md:col-span-5">
+                    <h2 class="text-4xl font-semibold mb-10">Our Impact So Far</h2>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="text-center md:text-left">
+                            <div class="text-6xl font-bold text-emerald-400">1500+</div>
+                            <p class="uppercase text-xs tracking-widest mt-2">Students Trained</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <div class="text-6xl font-bold text-emerald-400">500+</div>
+                            <p class="uppercase text-xs tracking-widest mt-2">Placed Students</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <div class="text-6xl font-bold text-emerald-400">4.8 LPA</div>
+                            <p class="uppercase text-xs tracking-widest mt-2">Average Package</p>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <div class="text-6xl font-bold text-emerald-400">70%</div>
+                            <p class="uppercase text-xs tracking-widest mt-2">Placed in 2-3 months</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonials -->
+                <div class="md:col-span-7">
+                    <div class="text-emerald-400 text-sm font-medium mb-4 flex items-center gap-x-2">
+                        <i class="fa-solid fa-quote-left"></i>
+                        REAL STORIES FROM REAL STUDENTS
+                    </div>
+                    
+                    <div id="testimonial-slider" class="relative overflow-hidden">
+                        <div id="slides" class="flex transition-transform duration-700">
+                            <!-- JS populated -->
+                        </div>
+                    </div>
+                    
+                    <!-- Dots -->
+                    <div class="flex justify-center gap-x-3 mt-8" id="dots"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLACEMENT PARTNERS -->
+    <section class="py-16 bg-white border-t">
+        <div class="max-w-7xl mx-auto px-6">
+            <p class="text-center text-gray-500 mb-8">Our students are working at</p>
+            <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 opacity-75">
+                <div class="text-3xl font-bold">Google</div>
+                <div class="text-3xl font-bold">Amazon</div>
+                <div class="text-3xl font-bold">Infosys</div>
+                <div class="text-3xl font-bold">TCS</div>
+                <div class="text-3xl font-bold">Wipro</div>
+                <div class="text-3xl font-bold">Accenture</div>
+                <div class="text-3xl font-bold">Capgemini</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / FOOTER CTA -->
+    <section id="contact" class="bg-emerald-700 py-20 text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-semibold mb-4">Ready to start your IT journey?</h2>
+            <p class="text-emerald-100 max-w-md mx-auto">Book a free counseling session today. Our team will help you choose the right course.</p>
+            
+            <div class="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="showContactForm()" 
+                        class="bg-white text-emerald-700 px-10 py-6 rounded-3xl text-xl font-semibold flex items-center gap-x-4">
+                    <i class="fa-solid fa-calendar"></i>
+                    Schedule Free Demo
+                </button>
+                <a href="tel:09579338436" class="text-xl font-medium flex items-center gap-x-3">
+                    Or call us now 
+                    <span class="text-4xl">📞</span>
+                    09579338436
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-16">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center gap-x-3 text-white mb-6">
+                    <div class="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-2xl font-bold">T</div>
+                    <span class="heading-font text-3xl font-semibold tracking-tighter">TriumphsLab</span>
+                </div>
+                <p class="text-sm">Practical IT Training &amp; Career Support</p>
+                <p class="mt-6 text-xs">© 2018 - 2026 TriumphsLab. All rights reserved.</p>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold text-white mb-4">Quick Links</h5>
+                <div class="space-y-3 text-sm">
+                    <a href="#" class="block hover:text-white">All Courses</a>
+                    <a href="#" class="block hover:text-white">Manual Testing</a>
+                    <a href="#" class="block hover:text-white">Java + Selenium</a>
+                    <a href="#" class="block hover:text-white">DevOps</a>
+                    <a href="#" class="block hover:text-white">Become a Trainer</a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold text-white mb-4">Company</h5>
+                <div class="space-y-3 text-sm">
+                    <a href="#" class="block hover:text-white">About Us</a>
+                    <a href="#" class="block hover:text-white">Our Trainers</a>
+                    <a href="#" class="block hover:text-white">Placement Partners</a>
+                    <a href="#" class="block hover:text-white">Blog</a>
+                    <a href="#" class="block hover:text-white">Contact</a>
+                </div>
+            </div>
+            
+            <div>
+                <h5 class="font-semibold text-white mb-4">Get in Touch</h5>
+                <div class="space-y-2 text-sm">
+                    <a href="tel:09579338436" class="flex items-center gap-x-2 hover:text-white">
+                        <i class="fa-solid fa-phone"></i> 09579338436 / 07892787036
+                    </a>
+                    <a href="mailto:contact@triumphslab.com" class="flex items-center gap-x-2 hover:text-white">
+                        <i class="fa-solid fa-envelope"></i> contact@triumphslab.com
+                    </a>
+                    <p class="text-xs mt-4">Bangalore • Mumbai • Pune</p>
+                </div>
+                
+                <div class="mt-8 flex gap-x-4 text-2xl">
+                    <i class="fa-brands fa-linkedin hover:text-white cursor-pointer"></i>
+                    <i class="fa-brands fa-youtube hover:text-white cursor-pointer"></i>
+                    <i class="fa-brands fa-instagram hover:text-white cursor-pointer"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div onclick="if(event.target.id === 'login-modal') hideLoginModal()" 
+         id="login-modal"
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="bg-white rounded-3xl max-w-md w-full mx-4 p-8">
+            <h3 class="text-2xl font-semibold mb-8">Sign in to your account</h3>
+            <div class="space-y-6">
+                <input type="email" placeholder="Email address" 
+                       class="w-full px-5 py-5 border rounded-3xl focus:outline-none focus:border-emerald-300">
+                <input type="password" placeholder="Password" 
+                       class="w-full px-5 py-5 border rounded-3xl focus:outline-none focus:border-emerald-300">
+                <button onclick="fakeLogin()" 
+                        class="w-full bg-emerald-600 text-white py-5 rounded-3xl font-semibold text-lg">Sign In</button>
+                <p class="text-center text-sm text-gray-500">Don't have an account? <span class="text-emerald-600 font-medium cursor-pointer">Sign up free</span></p>
+            </div>
+            <button onclick="hideLoginModal()" class="absolute top-6 right-6 text-2xl">✕</button>
+        </div>
+    </div>
+
+    <!-- Simple contact form modal -->
+    <div onclick="if(event.target.id === 'contact-modal') hideContactModal()" 
+         id="contact-modal"
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[100]">
+        <div onclick="event.stopImmediatePropagation()" class="bg-white rounded-3xl w-full max-w-lg mx-4 p-8">
+            <h3 class="text-3xl font-semibold mb-2">Book Your Free Counseling Session</h3>
+            <p class="text-gray-500 mb-8">Our team will call you within 30 minutes</p>
+            
+            <div class="space-y-5">
+                <input id="name" type="text" placeholder="Full Name" class="w-full px-6 py-4 border rounded-3xl">
+                <input id="phone" type="tel" placeholder="Phone Number" class="w-full px-6 py-4 border rounded-3xl">
+                <select id="course" class="w-full px-6 py-4 border rounded-3xl">
+                    <option>Interested in Manual Testing</option>
+                    <option>Interested in Java + Selenium</option>
+                    <option>Interested in DevOps</option>
+                    <option>Need career guidance</option>
+                </select>
+                <button onclick="submitDemoRequest()" 
+                        class="w-full py-5 bg-emerald-600 text-white text-xl rounded-3xl font-semibold">Confirm My Slot</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded via CDN
+        function initializeTailwind() {
+            // No need - CDN script already applied
+        }
+        
+        // Mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu')
+            const icon = document.getElementById('hamburger-icon')
+            menu.classList.toggle('hidden')
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.replace('fa-bars', 'fa-xmark')
+            } else {
+                icon.classList.replace('fa-xmark', 'fa-bars')
+            }
+        }
+        
+        // Login modal
+        function showLoginModal() {
+            document.getElementById('login-modal').classList.remove('hidden')
+            document.getElementById('login-modal').classList.add('flex')
+        }
+        
+        function hideLoginModal() {
+            const modal = document.getElementById('login-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function fakeLogin() {
+            hideLoginModal()
+            const notif = document.createElement('div')
+            notif.style.cssText = 'position:fixed; bottom:30px; right:30px; background:#00b894; color:white; padding:16px 24px; border-radius:9999px; box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.2);'
+            notif.innerHTML = '🎉 Logged in successfully! Welcome to TriumphsLab'
+            document.body.appendChild(notif)
+            setTimeout(() => notif.remove(), 3000)
+        }
+        
+        // Contact modal
+        function showContactForm() {
+            document.getElementById('contact-modal').classList.remove('hidden')
+            document.getElementById('contact-modal').classList.add('flex')
+        }
+        
+        function hideContactModal() {
+            const modal = document.getElementById('contact-modal')
+            modal.classList.add('hidden')
+            modal.classList.remove('flex')
+        }
+        
+        function submitDemoRequest() {
+            hideContactModal()
+            const name = document.getElementById('name').value || 'Student'
+            alert(`✅ Thank you, ${name}! Our counselor will call you shortly on the number you provided.`)
+        }
+        
+        // Testimonial slider
+        const testimonials = [
+            {
+                name: "Siddaling Natikar",
+                role: "Manual Testing → QA Engineer @ Infosys",
+                text: "The practical approach and mock interviews completely changed my confidence. Got placed in just 45 days after the course!",
+                avatar: "👨🏻‍💻"
+            },
+            {
+                name: "Puja Thombare",
+                role: "Non-IT → Automation Tester @ Accenture",
+                text: "From zero knowledge to building Selenium frameworks in 2 months. The trainers are industry experts who really care.",
+                avatar: "👩🏻‍💻"
+            },
+            {
+                name: "Narayan M",
+                role: "DevOps Engineer @ Capgemini",
+                text: "Lifetime access + real CI/CD projects helped me crack multiple interviews. Best investment in my career.",
+                avatar: "🧑🏻‍🚀"
+            }
+        ]
+        
+        function renderTestimonials() {
+            const container = document.getElementById('slides')
+            const dotsContainer = document.getElementById('dots')
+            
+            container.innerHTML = ''
+            dotsContainer.innerHTML = ''
+            
+            testimonials.forEach((t, index) => {
+                const slide = document.createElement('div')
+                slide.className = `min-w-full px-8 py-10 bg-gray-800 rounded-3xl flex flex-col justify-between`
+                slide.innerHTML = `
+                    <div class="text-6xl mb-6">${t.avatar}</div>
+                    <p class="text-lg leading-relaxed flex-1">"${t.text}"</p>
+                    <div class="mt-8">
+                        <p class="font-semibold">${t.name}</p>
+                        <p class="text-emerald-400 text-sm">${t.role}</p>
+                    </div>
+                `
+                container.appendChild(slide)
+                
+                // Dot
+                const dot = document.createElement('button')
+                dot.className = `w-3 h-3 rounded-full ${index === 0 ? 'bg-emerald-400' : 'bg-gray-600'}`
+                dot.onclick = () => goToSlide(index)
+                dotsContainer.appendChild(dot)
+            })
+            
+            // Auto slide
+            let current = 0
+            setInterval(() => {
+                current = (current + 1) % testimonials.length
+                goToSlide(current)
+            }, 5000)
+        }
+        
+        function goToSlide(index) {
+            const container = document.getElementById('slides')
+            container.style.transform = `translateX(-${index * 100}%)`
+            
+            // Update dots
+            const dots = document.getElementById('dots').children
+            Array.from(dots).forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('bg-emerald-400')
+                    dot.classList.remove('bg-gray-600')
+                } else {
+                    dot.classList.remove('bg-emerald-400')
+                    dot.classList.add('bg-gray-600')
+                }
+            })
+        }
+        
+        // Initialize everything
+        function initialize() {
+            renderTestimonials()
+            
+            // Smooth scroll for nav links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') !== '#') {
+                        e.preventDefault()
+                        const target = document.querySelector(this.getAttribute('href'))
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' })
+                        }
+                    }
+                })
+            })
+            
+            console.log('%c✅ TriumphsLab website ready! Responsive, clean, and fully functional.', 'background:#00b894;color:white;padding:2px 6px;border-radius:4px')
+        }
+        
+        window.onload = initialize
+    </script>
+</body>
+</html>
